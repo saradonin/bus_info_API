@@ -1,4 +1,9 @@
-from django.http import HttpResponse
+from rest_framework import generics
+from bus_lines.models import Organizer
+from bus_lines.serializers import OrganizerSerializer
 
-def home(request):
-    return HttpResponse("Hello, Django!")
+
+class OrganizerListView(generics.ListCreateAPIView):
+    queryset = Organizer.objects.all()
+    serializer_class = OrganizerSerializer
+
