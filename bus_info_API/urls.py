@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from bus_lines.views import OrganizerListView
+from bus_lines.views import CarrierListView, OrganizerListView, LineListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('organizers/', OrganizerListView.as_view()),
+    path('carriers/', CarrierListView.as_view()),
+    path('lines/', LineListView.as_view()),
 ]

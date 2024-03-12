@@ -27,23 +27,25 @@ class Carrier(models.Model):
         return self.name
 
 
+TYPES = (
+        ('regular', 'regularna'),
+        ('special', 'regularna-specjalna'),
+        ('public', 'użyeczeności publicznej'),
+)
+
+
 class Line(models.Model):
     """
     Represents bus line
     """
-    PERMIT_TYPES = (
-        ('zezwolenie', 'zezwolenie'),
-        ('zaświadczenie', 'zaświadczenie'),
-        ('zgłoszenie', 'zgłoszenie'),
-    )
     name = models.CharField(max_length=255)
     number = models.CharField(max_length=64)
     active = models.BooleanField(default=True)
     permit_number = models.CharField(max_length=32)
-    permit_type = models.CharField(max_length=64, choices=PERMIT_TYPES)
+    type = models.CharField(max_length=64, choices=TYPES, default=TYPES[0])
     carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE)
     organizer = models.ForeignKey(Organizer, on_delete=models.CASCADE)
     schedule = models.FileField(upload_to='shedules/')
-    valid_from = models.DateField()
-    valid_untill = models.DateField()
+    valid_from = models.DateField(null=True)
+    valid_untill = models.DateField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
