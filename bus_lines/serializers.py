@@ -15,6 +15,11 @@ class CarrierSerializer(serializers.ModelSerializer):
 
 
 class LineSerializer(serializers.ModelSerializer):
+    carrier = serializers.SlugRelatedField(
+        queryset=Carrier.objects.all(), slug_field='name')
+    organizer = serializers.SlugRelatedField(
+        queryset=Organizer.objects.all(), slug_field='name')
+
     class Meta:
         model = Line
         fields = '__all__'
