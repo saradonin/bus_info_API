@@ -8,12 +8,27 @@ class OrganizerListView(generics.ListCreateAPIView):
     serializer_class = OrganizerSerializer
 
 
-
 class CarrierListView(generics.ListCreateAPIView):
     queryset = Carrier.objects.all()
     serializer_class = CarrierSerializer
-    
-    
+
+
 class LineListView(generics.ListCreateAPIView):
     queryset = Line.objects.all()
     serializer_class = LineSerializer
+
+
+class LineListByOrganizerView(generics.ListCreateAPIView):
+    serializer_class = LineSerializer
+
+    def get_queryset(self):
+        organizer_id = self.kwargs['organizer_id']
+        return Line.objects.filter(organizer_id=organizer_id)
+
+
+class LineListByCarrierView(generics.ListCreateAPIView):
+    serializer_class = LineSerializer
+
+    def get_queryset(self):
+        carrier_id = self.kwargs['carrier_id']
+        return Line.objects.filter(carrier_id=carrier_id)
