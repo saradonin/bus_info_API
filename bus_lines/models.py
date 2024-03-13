@@ -30,7 +30,7 @@ class Carrier(models.Model):
 TYPES = (
         ('regular', 'regularna'),
         ('special', 'regularna-specjalna'),
-        ('public', 'użyeczeności publicznej'),
+        ('public', 'użyteczności publicznej'),
 )
 
 
@@ -41,7 +41,7 @@ class Line(models.Model):
     name = models.CharField(max_length=255)
     number = models.CharField(max_length=64)
     active = models.BooleanField(default=True)
-    permit_number = models.CharField(max_length=32)
+    permit_number = models.CharField(max_length=32, null=True)
     type = models.CharField(max_length=64, choices=TYPES, default=TYPES[0])
     carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE)
     organizer = models.ForeignKey(Organizer, on_delete=models.CASCADE)

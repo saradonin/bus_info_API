@@ -17,13 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from bus_lines.views import CarrierListView, OrganizerListView, LineListView, LineListByOrganizerView, LineListByCarrierView
+from bus_lines.views import CarrierListView, OrganizerListView, LineListView, LineListByOrganizerView, LineListByCarrierView, LineDetailsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('organizers/', OrganizerListView.as_view(), name="organizer-list"),
     path('carriers/', CarrierListView.as_view(), name="carrier-list"),
     path('lines/', LineListView.as_view(), name="line-list"),
-    path('lines/by-organizer/<int:organizer_id>/', LineListByOrganizerView.as_view(), name='line-list-by-organizer'),
-    path('lines/by-carrier/<int:carrier_id>/', LineListByCarrierView.as_view(), name='line-list-by-carrier'),
+    path('lines/by-organizer/<int:organizer_id>/',
+         LineListByOrganizerView.as_view(), name='line-list-by-organizer'),
+    path('lines/by-carrier/<int:carrier_id>/',
+         LineListByCarrierView.as_view(), name='line-list-by-carrier'),
+    path('line/<int:pk>/', LineDetailsView.as_view(), name='line-details'),
 ]

@@ -32,3 +32,8 @@ class LineListByCarrierView(generics.ListCreateAPIView):
     def get_queryset(self):
         carrier_id = self.kwargs['carrier_id']
         return Line.objects.filter(carrier_id=carrier_id)
+    
+
+class LineDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Line.objects.all()
+    serializer_class = LineSerializer

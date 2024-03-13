@@ -1,11 +1,11 @@
 import os
 import sys
 import random
-
 import pytest
 from rest_framework.test import APIClient
 
 from bus_lines.models import Carrier, Organizer, Line, TYPES
+from utils import create_fake_line
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -25,11 +25,5 @@ def set_up():
         carrier_name = f"Company {i}"
         Carrier.objects.create(name=carrier_name)
 
-    for i in range(10):
-        name = f"City A{i} - City B{i}"
-        organizer = Organizer.objects.order_by('?')[0]
-        carrier = Carrier.objects.order_by('?')[0]
-        type = random.choice(TYPES)[0]
-
-        Line.objects.create(name=name, number=str(
-            i), organizer=organizer, carrier=carrier, type=type)
+    for _ in range(10):
+        create_fake_line()
