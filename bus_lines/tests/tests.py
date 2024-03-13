@@ -63,28 +63,23 @@ def test_line_get_details(client, set_up):
         assert field in response.data
 
 
-
-# TODO fix
+# TODO fix 400 error
 @pytest.mark.django_db
 def test_line_post(client, set_up):
     prev_line_count = Line.objects.count()
 
     new_line = fake_line_data()
 
-    print(new_line)
-    new_line["carrier"] = Carrier.objects.get(id=new_line["carrier"])
-    new_line["organizer"] = Organizer.objects.get(id=new_line["organizer"])
-    print(new_line)
-
     url = reverse('line-list')
     response = client.post(url, new_line, format='json')
 
     assert response.status_code == 201
-    assert Line.objects.count == prev_line_count + 1
+    assert Line.objects.count() == prev_line_count + 1
 
     for key, value in new_line.items():
-        assert key in response.date_created
-        assert response.data[key] == value
+        assert key in response.data
+        if key != "date_created":
+            assert response.data[key] == value
 
 
 @pytest.mark.django_db

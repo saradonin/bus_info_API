@@ -45,7 +45,7 @@ class Line(models.Model):
     type = models.CharField(max_length=64, choices=TYPES, default=TYPES[0])
     carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE)
     organizer = models.ForeignKey(Organizer, on_delete=models.CASCADE)
-    schedule = models.FileField(upload_to='shedules/')
+    schedule = models.FileField(upload_to='shedules/', null=True)
     valid_from = models.DateField(null=True)
     valid_untill = models.DateField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
