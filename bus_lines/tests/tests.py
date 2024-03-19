@@ -217,10 +217,10 @@ def test_line_get_list_by_organizer(client, set_up):
 
 
 @pytest.mark.django_db
-def test_line_get_details(user_logged_in, set_up):
+def test_line_get_details(client, set_up):
     line = Line.objects.first()
     url = reverse('line-details', kwargs={'pk': line.id})
-    response = user_logged_in.get(url, {}, format='json')
+    response = client.get(url, {}, format='json')
 
     assert response.status_code == 200
     for field in ("name", "number", "permit_number"):
@@ -275,8 +275,8 @@ def test_line_update(user_logged_in, set_up):
     for key, value in new_line.items():
         assert key in response.data
         assert response.data[key] == value
-        
-        
+
+
 @pytest.mark.django_db
 def test_line_update_unauthorized(client, set_up):
     old_line = Line.objects.first()
@@ -302,7 +302,7 @@ def test_line_delete(user_logged_in, set_up):
     assert response.status_code == 204
     assert Line.objects.count() == prev_line_count - 1
     assert not Line.objects.filter(id=line.id).exists()
-    
+
 
 @pytest.mark.django_db
 def test_line_delete_unauthorized(client, set_up):
