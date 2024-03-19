@@ -20,7 +20,9 @@ def test_organizer_post(client, set_up):
     url = reverse('organizer-list')
 
     response = client.post(url, new_organizer, format='json')
+    invalid_response = client.post(url, None, format='json')
 
+    assert invalid_response.status_code == 400
     assert response.status_code == 201
     assert Organizer.objects.count() == prev_organizer_count + 1
 
@@ -71,7 +73,9 @@ def test_carrier_post(client, set_up):
 
     url = reverse('carrier-list')
     response = client.post(url, new_carrier, format='json')
+    invalid_response = client.post(url, None, format='json')
 
+    assert invalid_response.status_code == 400
     assert response.status_code == 201
     assert Carrier.objects.count() == prev_carrier_count + 1
 
@@ -157,7 +161,9 @@ def test_line_post(client, set_up):
 
     url = reverse('line-list')
     response = client.post(url, new_line, format='json')
+    invalid_response = client.post(url, None, format='json')
 
+    assert invalid_response.status_code == 400
     assert response.status_code == 201
     assert Line.objects.count() == prev_line_count + 1
 

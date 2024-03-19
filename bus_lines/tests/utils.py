@@ -52,6 +52,7 @@ def fake_line_data():
         "carrier": Carrier.objects.order_by('?')[0].id,
         "organizer": Organizer.objects.order_by('?')[0].id,
         "schedule": None,
+        "pricing": None,
         "valid_from": date,
         "valid_untill": date,
     }
