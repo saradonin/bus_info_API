@@ -38,7 +38,7 @@ def test_organizer_post_unauthorized(client, set_up):
     url = reverse('organizer-list')
 
     response = client.post(url, new_organizer, format='json')
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Organizer.objects.count() == prev_organizer_count
     assert not Organizer.objects.filter(name=new_organizer["name"]).exists()
 
@@ -66,7 +66,7 @@ def test_organizer_update_unauthorized(client, set_up):
 
     response = client.patch(url, new_organizer, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Organizer.objects.filter(name=old_organizer.name).exists()
     assert not Organizer.objects.filter(name=new_organizer["name"]).exists()
 
@@ -90,7 +90,7 @@ def test_organizer_delete_unauthorized(client, set_up):
     url = reverse('organizer-details', kwargs={'pk': organizer.id})
     response = client.delete(url, {}, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Organizer.objects.count() == prev_organizer_count
     assert Organizer.objects.filter(id=organizer.id).exists()
 
@@ -128,7 +128,7 @@ def test_carrier_post_unauthorized(client, set_up):
 
     url = reverse('carrier-list')
     response = client.post(url, new_carrier, format='json')
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Carrier.objects.count() == prev_carrier_count
     assert not Carrier.objects.filter(name=new_carrier["name"]).exists()
 
@@ -156,7 +156,7 @@ def test_carrier_update_unauthorozed(client, set_up):
 
     response = client.patch(url, new_carrier, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Carrier.objects.filter(name=old_carrier.name).exists()
     assert not Carrier.objects.filter(name=new_carrier["name"]).exists()
 
@@ -180,7 +180,7 @@ def test_carrier_delete_unauthorized(client, set_up):
     url = reverse('carrier-details', kwargs={'pk': carrier_to_delete.id})
     response = client.delete(url, {}, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Carrier.objects.count() == prev_carrier_count
     assert Carrier.objects.filter(id=carrier_to_delete.id).exists()
 
@@ -255,7 +255,7 @@ def test_line_post_unauthorized(client, set_up):
 
     url = reverse('line-list')
     response = client.post(url, new_line, format='json')
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Line.objects.count() == prev_line_count
     assert not Line.objects.filter(
         name=new_line["name"], number=new_line["number"], organizer=new_line["organizer"], carrier=new_line["carrier"]).exists()
@@ -285,7 +285,7 @@ def test_line_update_unauthorized(client, set_up):
 
     response = client.patch(url, new_line, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Line.objects.filter(
         name=old_line.name, number=old_line.number, organizer=old_line.organizer, carrier=old_line.carrier).exists()
     assert not Line.objects.filter(
@@ -311,6 +311,6 @@ def test_line_delete_unauthorized(client, set_up):
     url = reverse('line-details', kwargs={'pk': line.id})
     response = client.delete(url, {}, format='json')
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert Line.objects.count() == prev_line_count
     assert Line.objects.filter(id=line.id).exists()

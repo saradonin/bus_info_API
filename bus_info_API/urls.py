@@ -18,16 +18,28 @@ from django.contrib import admin
 from django.urls import path
 
 from bus_lines.views import CarrierListCreateView, CarrierRetrieveUpdateDestroyView, OrganizerListCreateView, OrganizerRetrieveUpdateDestroyView, LineListCreateView, LineListByOrganizerView, LineListByCarrierView, LineRetrieveUpdateDestroyView
+from accounts.views import MyObtainTokenPairView, RegisterView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
+    # path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+
+    path('login/', MyObtainTokenPairView.as_view(), name='token-obtain_pair'),
+    path('login/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+    path('register/', RegisterView.as_view(), name='auth-register'),
+
     path('organizers/', OrganizerListCreateView.as_view(), name="organizer-list"),
     path('organizer/<int:pk>/', OrganizerRetrieveUpdateDestroyView.as_view(),
          name='organizer-details'),
+
     path('carriers/', CarrierListCreateView.as_view(), name="carrier-list"),
     path('carrier/<int:pk>/', CarrierRetrieveUpdateDestroyView.as_view(),
          name='carrier-details'),
+
     path('lines/', LineListCreateView.as_view(), name="line-list"),
     path('lines/by-organizer/<int:organizer_id>/',
          LineListByOrganizerView.as_view(), name='line-list-by-organizer'),
