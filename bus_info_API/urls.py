@@ -28,9 +28,9 @@ urlpatterns = [
     # path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     # path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
-    path('login/', MyObtainTokenPairView.as_view(), name='token-obtain_pair'),
+    path('login/', MyObtainTokenPairView.as_view(), name='token-obtain-pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
-    path('register/', RegisterView.as_view(), name='auth-register'),
+    path('register/', RegisterView.as_view(), name='register'),
 
     path('organizers/', OrganizerListCreateView.as_view(), name="organizer-list"),
     path('organizer/<int:pk>/', OrganizerRetrieveUpdateDestroyView.as_view(),
