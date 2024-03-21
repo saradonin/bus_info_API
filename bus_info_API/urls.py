@@ -17,20 +17,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from bus_lines.views import CarrierListView, CarrierDetailsView, OrganizerListView, OrganizerDetailsView, LineListView, LineListByOrganizerView, LineListByCarrierView, LineDetailsView
+from bus_lines.views import CarrierListCreateView, CarrierRetrieveUpdateDestroyView, OrganizerListCreateView, OrganizerRetrieveUpdateDestroyView, LineListCreateView, LineListByOrganizerView, LineListByCarrierView, LineRetrieveUpdateDestroyView
+from accounts.views import MyObtainTokenPairView, RegisterView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('organizers/', OrganizerListView.as_view(), name="organizer-list"),
-    path('organizer/<int:pk>/', OrganizerDetailsView.as_view(),
+
+    path('login/', MyObtainTokenPairView.as_view(), name='token-obtain-pair'),
+    path('login/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+    path('register/', RegisterView.as_view(), name='register'),
+
+    path('organizers/', OrganizerListCreateView.as_view(), name="organizer-list"),
+    path('organizer/<int:pk>/', OrganizerRetrieveUpdateDestroyView.as_view(),
          name='organizer-details'),
-    path('carriers/', CarrierListView.as_view(), name="carrier-list"),
-    path('carrier/<int:pk>/', CarrierDetailsView.as_view(), name='carrier-details'),
-    path('lines/', LineListView.as_view(), name="line-list"),
+
+    path('carriers/', CarrierListCreateView.as_view(), name="carrier-list"),
+    path('carrier/<int:pk>/', CarrierRetrieveUpdateDestroyView.as_view(),
+         name='carrier-details'),
+
+    path('lines/', LineListCreateView.as_view(), name="line-list"),
     path('lines/by-organizer/<int:organizer_id>/',
          LineListByOrganizerView.as_view(), name='line-list-by-organizer'),
     path('lines/by-carrier/<int:carrier_id>/',
          LineListByCarrierView.as_view(), name='line-list-by-carrier'),
-    path('line/<int:pk>/', LineDetailsView.as_view(), name='line-details'),
+    path('line/<int:pk>/', LineRetrieveUpdateDestroyView.as_view(),
+         name='line-details'),
 ]
