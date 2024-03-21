@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-    'bus_lines'
+    'bus_lines',
+    'territory'
 ]
 
 MIDDLEWARE = [
