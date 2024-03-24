@@ -33,13 +33,13 @@ def user_data():
 @pytest.fixture
 def user_logged_in():
     user = User.objects.create_user(
-        username='test_user', password='test_password', email='test@email.com')
+        username='testuser', password='testpassword', email='test@example.com')
     refresh = RefreshToken.for_user(user)
 
     client = APIClient()
     client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
 
-    client.login(username='test_user', password='test_password')
+    client.login(username='testuser', password='testpassword')
     user.client = client
     return client
 
