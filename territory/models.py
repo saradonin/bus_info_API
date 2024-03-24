@@ -1,7 +1,10 @@
 from django.db import models
 
 
-class TerritorialUnits(models.Model):
+class TerritorialUnit(models.Model):
+    """
+    Represents administrative division unit of the country
+    """
     name = models.CharField(max_length=64)
     type_name = models.CharField(max_length=64)
     region = models.CharField(max_length=2)
@@ -12,6 +15,9 @@ class TerritorialUnits(models.Model):
 
 
 class Location(models.Model):
+    """
+    Represents a locality
+    """
     name = models.CharField(max_length=64)
     region = models.CharField(max_length=2)
     county = models.CharField(max_length=2, blank=True, null=True)

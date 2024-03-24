@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from territory.models import TerritorialUnits, Location
+from territory.models import TerritorialUnit, Location
 
 
-class TerritorialUnitsSerializer(serializers.ModelSerializer):
+class TerritorialUnitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TerritorialUnits
+        model = TerritorialUnit
         fields = '__all__'
 
 
