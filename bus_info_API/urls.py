@@ -19,6 +19,7 @@ from django.urls import path
 
 from bus_lines.views import CarrierListCreateView, CarrierRetrieveUpdateDestroyView, OrganizerListCreateView, OrganizerRetrieveUpdateDestroyView, LineListCreateView, LineListByOrganizerView, LineListByCarrierView, LineRetrieveUpdateDestroyView
 from accounts.views import MyObtainTokenPairView, RegisterView
+from territory.views import TerritorialUnitListView, LocationListView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
@@ -44,4 +45,7 @@ urlpatterns = [
          LineListByCarrierView.as_view(), name='line-list-by-carrier'),
     path('line/<int:pk>/', LineRetrieveUpdateDestroyView.as_view(),
          name='line-details'),
+    
+    path('territory/', TerritorialUnitListView.as_view(), name='territorial-unit-list'),
+    path('locations/', LocationListView.as_view(), name='location-list'),
 ]
