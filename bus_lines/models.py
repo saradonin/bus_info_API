@@ -10,8 +10,9 @@ class Organizer(models.Model):
     city = models.CharField(max_length=32)
     postcode = models.CharField(max_length=32)
     address = models.CharField(max_length=255)
-    
-    territorial_unit = models.OneToOneField(TerritorialUnit, on_delete=models.SET_NULL, blank=True, null=True)
+
+    territorial_unit = models.OneToOneField(
+        TerritorialUnit, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -53,7 +54,8 @@ class Line(models.Model):
     valid_from = models.DateField(blank=True, null=True)
     valid_untill = models.DateField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    
-    locations = models.ManyToManyField(Location, blank=True)
-    
 
+    locations = models.ManyToManyField(Location, blank=True)
+
+    def __str__(self):
+        return f"{self.number} {self.name}"

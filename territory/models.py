@@ -13,6 +13,17 @@ class TerritorialUnit(models.Model):
     type = models.CharField(max_length=1, blank=True, null=True)
     date = models.DateField()
 
+    def prefix(self):
+        if self.community:
+            return "Gmina "
+        elif self.county:
+            return "powiat "
+        else:
+            return ""
+
+    def __str__(self):
+        return f"{self.prefix()}{self.name}"
+
 
 class Location(models.Model):
     """
