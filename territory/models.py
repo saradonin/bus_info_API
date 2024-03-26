@@ -37,7 +37,7 @@ class Location(models.Model):
     location_type = models.CharField(max_length=2)
 
     symbol = models.CharField(max_length=8)
-    symbol_podst = models.CharField(max_length=8)
+    parent_symbol = models.CharField(max_length=8)
     date = models.DateField()
 
     def __str__(self):
