@@ -46,7 +46,7 @@ def fake_line_data():
     return {
         "name": f"{faker.city()} - {faker.city()} - {faker.city()}",
         "number": str(random.randint(1000, 9999)),
-        "active": True,
+        "is_active": True,
         "permit_number": str(random.randint(1, 100)),
         "type": random.choice(TYPES)[0],
         "carrier": Carrier.objects.order_by('?')[0].id,

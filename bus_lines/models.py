@@ -44,7 +44,7 @@ class Line(models.Model):
     """
     name = models.CharField(max_length=255)
     number = models.CharField(max_length=64)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     permit_number = models.CharField(max_length=32, blank=True, null=True)
     type = models.CharField(max_length=64, choices=TYPES, default=TYPES[0])
     carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE)
