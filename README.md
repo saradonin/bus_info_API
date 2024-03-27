@@ -2,7 +2,7 @@
 
 API aimed at ensuring compliance with legal regulations by providing a comprehensive passenger information system.
 
-## Features:
+## Features
 - ser Authentication: Secure token-based authentication system using JWT tokens.
 - User Registration: Simple user registration process to create new accounts.
 - Organizer Management: CRUD operations for managing organizers.
@@ -14,11 +14,10 @@ API aimed at ensuring compliance with legal regulations by providing a comprehen
 
 ## Endpoints
 
-
 #### Authentication endpoints:
-- /login/: Endpoint for obtaining JWT tokens for authentication.
-- /login/refresh/: Endpoint for refreshing JWT tokens.
-- /register/: Endpoint for user registration.
+- `/login/`: Endpoint for obtaining JWT tokens for authentication.
+- `/login/refresh/`: Endpoint for refreshing JWT tokens.
+- `/register/`: Endpoint for user registration.
 
 
 #### Territorial units and location endpoints:
